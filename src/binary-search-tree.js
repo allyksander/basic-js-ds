@@ -42,14 +42,24 @@ module.exports = class BinarySearchTree {
     }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(data) {
+    return this.find(data) ? true : false
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    function search(node, data) {
+      if (node === null) {
+        return null
+      } else if (data < node.data) {
+        return search(node.left, data)
+      } else if (data > node.data) {
+        return search(node.right, data)
+      } else {
+        return node
+      }
+    }
+
+    return search(this.rootNode, data)
   }
 
   remove(/* data */) {
@@ -58,13 +68,30 @@ module.exports = class BinarySearchTree {
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    function findMin(node) {
+      if (node === null) {
+        return null
+      } else if (node.left === null) {
+        return node.data
+      } else {
+        return findMin(node.left)
+      }
+    }
+
+    return findMin(this.rootNode)
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    function findMin(node) {
+      if (node === null) {
+        return null
+      } else if (node.right === null) {
+        return node.data
+      } else {
+        return findMin(node.right)
+      }
+    }
 
+    return findMin(this.rootNode)
+  }
 }
